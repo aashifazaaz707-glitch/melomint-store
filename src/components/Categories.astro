@@ -7,29 +7,38 @@ const categories = [
 ];
 ---
 
-<section class="py-12 md:py-24 bg-stone-100/50">
+<section class="py-12 md:py-24 bg-stone-100/50 overflow-hidden">
   <div class="container mx-auto px-4">
     <div class="space-y-12">
-      <div class="text-center md:text-left">
-        <h2 class="text-3xl md:text-5xl text-charcoal">Explore Our Collections</h2>
-        <p class="text-stone-500 mt-4">Curated with love for your special ones.</p>
+      <div class="text-center md:text-left reveal">
+        <h2 class="text-4xl md:text-6xl text-charcoal font-script leading-tight">Explore Our Collections</h2>
+        <p class="text-stone-500 mt-2 font-medium flex items-center justify-center md:justify-start gap-2">
+          Curated with 
+          <span class="relative inline-block">
+            <span class="font-script text-primary text-2xl md:text-3xl">love</span>
+            <span class="heart-pop absolute -top-4 -right-2 opacity-0 text-xl">❤️</span>
+          </span>
+          for your special ones.
+        </p>
       </div>
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
         {categories.map((category) => (
           <div class="group cursor-pointer">
-            <div class="bg-white p-2 rounded-[40px] shadow-sm group-hover:shadow-md transition-all duration-300">
-              <div class="aspect-square overflow-hidden rounded-[32px]">
+            <div class="bg-white p-3 rounded-[40px] shadow-sm group-hover:shadow-xl transition-all duration-500 border border-transparent group-hover:border-emerald-100">
+              <div class="aspect-square overflow-hidden rounded-[32px] relative">
                 <img 
                   src={category.image} 
                   alt={category.name} 
-                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
+                <div class="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/5 transition-all duration-500"></div>
               </div>
-              <div class="py-4 text-center">
-                <span class="font-bold text-sm md:text-base tracking-wide uppercase text-charcoal">
+              <div class="py-5 text-center flex items-center justify-center gap-2">
+                <span class="font-bold text-[10px] md:text-xs tracking-[0.2em] uppercase text-charcoal">
                   {category.name}
                 </span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 text-primary"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
               </div>
             </div>
           </div>
@@ -38,3 +47,53 @@ const categories = [
     </div>
   </div>
 </section>
+
+<style>
+  .font-script {
+    font-family: 'Dancing Script', cursive;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s ease-out;
+  }
+
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal.active .heart-pop {
+    animation: heart-pop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.8s forwards,
+               heart-pulse 2s ease-in-out infinite 1.6s;
+  }
+
+  @keyframes heart-pop {
+    0% {
+      opacity: 0;
+      transform: scale(0) rotate(-45deg) translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) rotate(0) translateY(0);
+    }
+  }
+
+  @keyframes heart-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+  }
+</style>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+</script>

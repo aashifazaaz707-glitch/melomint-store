@@ -1,12 +1,78 @@
 ---
 ---
 
-<header class="py-6 md:py-8 sticky top-0 bg-cream/80 backdrop-blur-md z-50">
+<header 
+  id="main-header"
+  class="fixed top-0 left-0 right-0 py-6 md:py-8 z-50 transition-all duration-500 ease-in-out border-b border-transparent"
+>
   <div class="container mx-auto px-4 flex justify-center items-center">
-    <a href="/" class="group">
-      <span class="font-serif text-3xl md:text-4xl tracking-tight text-charcoal group-hover:text-primary transition-colors duration-300">
-        MeloMint
-      </span>
+    <a href="/" class="group relative flex items-center">
+      <div class="relative inline-block overflow-hidden whitespace-nowrap logo-container">
+        <span class="logo-text font-script text-4xl md:text-5xl tracking-wide text-charcoal group-hover:text-primary transition-colors duration-300">
+          MeloMint
+        </span>
+      </div>
+      
+      {/* Animated Flower Decor with Drop Animation */}
+      <div class="flower-drop transform ml-1 opacity-0 pointer-events-none">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-400 fill-emerald-100/30">
+          <circle cx="12" cy="12" r="3"/><path d="M12 16.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 1 1 12 7.5 4.5 4.5 0 1 1 16.5 12 4.5 4.5 0 1 1 12 16.5"/><path d="M12 12c.5-5.5 5.5-5.5 5.5-5.5"/><path d="M12 12c-5.5-.5-5.5-5.5-5.5-5.5"/><path d="M12 12c-.5 5.5-5.5 5.5-5.5 5.5"/><path d="M12 12c5.5.5 5.5 5.5 5.5 5.5"/>
+        </svg>
+      </div>
+      
+      {/* Decorative underline animation */}
+      <div class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary/20 transition-all duration-500 group-hover:w-full"></div>
     </a>
   </div>
 </header>
+
+<style>
+  .font-script {
+    font-family: 'Dancing Script', cursive;
+  }
+
+  .logo-container {
+    width: 0;
+    animation: reveal-text 2s cubic-bezier(0.45, 0, 0.55, 1) forwards;
+  }
+
+  .flower-drop {
+    animation: drop-arc 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1.6s forwards,
+               sway 4s ease-in-out infinite 2.4s;
+  }
+
+  @keyframes reveal-text {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+
+  @keyframes drop-arc {
+    0% {
+      opacity: 0;
+      transform: translate(-20px, -40px) rotate(-45deg);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(0, 0) rotate(-12deg);
+    }
+  }
+
+  @keyframes sway {
+    0%, 100% { transform: translate(0, 0) rotate(-12deg) scale(1); }
+    50% { transform: translate(2px, -2px) rotate(15deg) scale(1.1); }
+  }
+</style>
+
+<script>
+  const header = document.getElementById('main-header');
+  
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      header?.classList.add('bg-cream/90', 'backdrop-blur-md', 'py-4', 'md:py-5', 'border-stone-200/50', 'shadow-sm');
+      header?.classList.remove('py-6', 'md:py-8', 'border-transparent');
+    } else {
+      header?.classList.remove('bg-cream/90', 'backdrop-blur-md', 'py-4', 'md:py-5', 'border-stone-200/50', 'shadow-sm');
+      header?.classList.add('py-6', 'md:py-8', 'border-transparent');
+    }
+  });
+</script>
