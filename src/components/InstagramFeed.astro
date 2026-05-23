@@ -1,0 +1,82 @@
+---
+const posts = [
+  { image: "https://pub-82aee35f0f1e41a5a2d6ffec8860f5a2.r2.dev/file_000000008db472089e247c37af1da4a5.png", link: "https://www.instagram.com/melomintstore?igsh=NHQwejZsbTk3amVn" },
+  { image: "https://pub-82aee35f0f1e41a5a2d6ffec8860f5a2.r2.dev/file_0000000033d87208b62176740d34974d.png", link: "https://www.instagram.com/melomintstore?igsh=NHQwejZsbTk3amVn" },
+  { image: "https://pub-82aee35f0f1e41a5a2d6ffec8860f5a2.r2.dev/file_00000000525c7208b7439178b6bf753a.png", link: "https://www.instagram.com/melomintstore?igsh=NHQwejZsbTk3amVn" },
+  { image: "https://pub-82aee35f0f1e41a5a2d6ffec8860f5a2.r2.dev/file_0000000034bc72089f2a2de7b687ae08.png", link: "https://www.instagram.com/melomintstore?igsh=NHQwejZsbTk3amVn" },
+];
+---
+
+<section class="py-12 md:py-24 bg-cream/50 overflow-hidden">
+  <div class="container mx-auto px-4">
+    <div class="space-y-12">
+      <div class="text-center space-y-4 reveal-instagram">
+        <h2 class="text-4xl md:text-6xl text-charcoal font-script leading-tight">Follow Our Journey</h2>
+        <p class="text-stone-500 font-medium">Get a daily dose of cuteness and new arrivals on Instagram.</p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 reveal-instagram-grid">
+        {posts.map((post) => (
+          <a 
+            href={post.link} 
+            target="_blank" 
+            class="group relative aspect-square overflow-hidden rounded-[32px] bg-stone-100 shadow-sm hover:shadow-xl transition-all duration-500"
+          >
+            <img 
+              src={post.image} 
+              alt="MeloMint Instagram Post" 
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+            />
+            <div class="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <div class="text-center pt-4">
+        <a 
+          href="https://www.instagram.com/melomintstore?igsh=NHQwejZsbTk3amVn" 
+          target="_blank"
+          class="inline-flex items-center gap-3 px-8 h-14 bg-white text-charcoal font-bold text-xs uppercase tracking-[0.2em] rounded-full border-2 border-emerald-300 hover:bg-emerald-300 transition-all duration-500 active:scale-95 shadow-sm"
+        >
+          <span>@melomintstore</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .font-script {
+    font-family: 'Dancing Script', cursive;
+  }
+
+  .reveal-instagram, .reveal-instagram-grid {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s ease-out;
+  }
+
+  .reveal-instagram.active, .reveal-instagram-grid.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-instagram-grid {
+    transition-delay: 0.3s;
+  }
+</style>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal-instagram, .reveal-instagram-grid').forEach((el) => observer.observe(el));
+</script>
