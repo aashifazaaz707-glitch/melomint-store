@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: var(--color-emerald-300);
+  --color-secondary: var(--color-rose-100);
+  --color-cream: #FAFAFA;
+  --color-charcoal: var(--color-stone-800);
+
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Quicksand", sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-cream text-charcoal font-sans antialiased selection:bg-primary/30 overflow-x-hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+@layer utilities {
+  .rounded-boutique {
+    @apply rounded-[32px];
+  }
+  
+  .shadow-boutique {
+    @apply shadow-sm hover:shadow-md transition-shadow duration-300;
+  }
+}
